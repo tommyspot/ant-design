@@ -23,33 +23,6 @@ const { Option } = Select;
 
 const antdVersion: string = packageJson.version;
 
-let docsearch: any;
-if (typeof window !== 'undefined') {
-  // eslint-disable-next-line global-require
-  docsearch = require('docsearch.js');
-}
-
-function initDocSearch(locale: string) {
-  if (!docsearch) {
-    return;
-  }
-  const lang = locale === 'zh-CN' ? 'cn' : 'en';
-  docsearch({
-    apiKey: '60ac2c1a7d26ab713757e4a081e133d0',
-    indexName: 'ant_design',
-    inputSelector: '#search-box input',
-    algoliaOptions: { facetFilters: [`tags:${lang}`] },
-    transformData(hits: { url: string }[]) {
-      hits.forEach(hit => {
-        hit.url = hit.url.replace('ant.design', window.location.host);
-        hit.url = hit.url.replace('https:', window.location.protocol);
-      });
-      return hits;
-    },
-    debug: false, // Set debug to true if you want to inspect the dropdown
-  });
-}
-
 export interface HeaderProps {
   intl: {
     locale: string;
@@ -80,9 +53,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   };
 
   componentDidMount() {
-    const { intl, router } = this.props;
+    const { router } = this.props;
     router.listen(this.handleHideMenu);
-    // initDocSearch(intl.locale);
 
     window.addEventListener('resize', this.onWindowResize);
     this.onWindowResize();
