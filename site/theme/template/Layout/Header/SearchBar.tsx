@@ -47,6 +47,7 @@ export const SearchBar = ({ isZhCN, responsive, onTriggerFocus, algoliaConfig }:
   const [isModalOpen, setModalOpen] = React.useState(false);
   const [searchModalQuery, setSearchModalQuery] = React.useState('');
   const searchPlaceholder = isZhCN ? '在 ant.design 中搜索' : 'Search in ant.design';
+  const searchInputPlaceholder = isZhCN ? '搜索' : 'Search';
 
   const handleInputFocus = React.useCallback((focus: boolean) => {
     setInputFocus(focus);
@@ -122,7 +123,7 @@ export const SearchBar = ({ isZhCN, responsive, onTriggerFocus, algoliaConfig }:
       </Helmet>
 
       <Input
-        placeholder={searchPlaceholder}
+        placeholder={searchInputPlaceholder}
         onTouchStart={triggerSearchModalImport}
         onMouseOver={triggerSearchModalImport}
         value={inputSearch}
@@ -136,7 +137,7 @@ export const SearchBar = ({ isZhCN, responsive, onTriggerFocus, algoliaConfig }:
         }}
         prefix={<SearchOutlined />}
         suffix={
-          <Tooltip title={isZhCN ? '唤起搜索窗' : 'Search in doc modal'}>
+          <Tooltip placement="right" title={isZhCN ? '唤起搜索窗' : 'Search in doc modal'}>
             <span
               className="keybindings"
               onClick={() => {
