@@ -31,16 +31,21 @@ const CTRL_KEY = 'Ctrl';
 const CMD_KEY = '⌘';
 
 function isAppleDevice() {
-  return !!navigator && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
+  return typeof window !== 'undefined' && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
 }
 
 /**
- * Recompose for algolia DocSearch Component
- * Inspiring by
- *  - [@docusaurus-theme-search-algolia](https://docusaurus.io/docs/api/themes/@docusaurus/theme-search-algolia)
- *  - [DocSearchModal Docs](https://autocomplete-experimental.netlify.app/docs/DocSearchModal)
+ * Recompose for algolia DocSearch Component Inspiring by
+ *
+ * - [@docusaurus-theme-search-algolia](https://docusaurus.io/docs/api/themes/@docusaurus/theme-search-algolia)
+ * - [DocSearchModal Docs](https://autocomplete-experimental.netlify.app/docs/DocSearchModal)
  */
-export const SearchBar = ({ isZhCN, responsive, onTriggerFocus, algoliaConfig }: SearchBarProps) => {
+export const SearchBar = ({
+  isZhCN,
+  responsive,
+  onTriggerFocus,
+  algoliaConfig,
+}: SearchBarProps) => {
   const [isInputFocus, setInputFocus] = React.useState(false);
   const [inputSearch, setInputSearch] = React.useState('');
 
